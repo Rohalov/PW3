@@ -1,0 +1,22 @@
+CREATE DATABASE pw3
+GO
+
+USE pw3
+GO
+
+CREATE TABLE Users(
+	user_id INT IDENTITY(1,1) NOT NULL,
+	name NVARCHAR(50) NOT NULL,
+	email NVARCHAR(50) NULL,
+	CONSTRAINT PK_Users_Id PRIMARY KEY (user_id)
+)
+GO
+
+CREATE TABLE Orders(
+	order_id INT IDENTITY(1,1) NOT NULL,
+	user_id INT NOT NULL,
+	product NVARCHAR(50) NOT NULL,
+	price DECIMAL(18, 2) NOT NULL,
+	CONSTRAINT PK_Orders_Id PRIMARY KEY (order_id),
+	CONSTRAINT FK_Orders_Users FOREIGN KEY(user_id) REFERENCES Users(user_id)
+)
